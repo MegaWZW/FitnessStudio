@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/FitnessStudio
+    username: postgres
+    password: DPht*3Vl$QW9Y40$5H3BLoxuQ
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create
+    show-sql: true
