@@ -30,6 +30,8 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addConverter(new IngredientEntityToIngredientDTO(new ProductEntityToProductDTO()));
 		registry.addConverter(new ProductWithWeightDTOToIngredientEntity(productService));
 		registry.addConverter(new RecipeEntityToRecipeDTO(new IngredientEntityToIngredientDTO(new ProductEntityToProductDTO())));
+		registry.addConverter(new UserRegistrationDTOToUserEntity());
+		registry.addConverter(new UserEntityToUserToken());
 	}
 
 	@Bean

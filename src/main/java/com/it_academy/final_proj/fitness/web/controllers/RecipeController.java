@@ -1,4 +1,4 @@
-package com.it_academy.final_proj.fitness.web;
+package com.it_academy.final_proj.fitness.web.controllers;
 
 import com.it_academy.final_proj.fitness.core.dto.PageDTO;
 import com.it_academy.final_proj.fitness.core.dto.recipe.RecipeCreateDTO;

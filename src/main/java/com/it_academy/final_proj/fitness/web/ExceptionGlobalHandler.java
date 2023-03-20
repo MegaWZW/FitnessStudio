@@ -2,6 +2,7 @@ package com.it_academy.final_proj.fitness.web;
 
 import com.it_academy.final_proj.fitness.core.dto.error.ErrorResponseDTO;
 import com.it_academy.final_proj.fitness.core.dto.error.StructuredErrorResponseDTO;
+import com.it_academy.final_proj.fitness.core.exceptions.DuplicatedMailException;
 import com.it_academy.final_proj.fitness.core.exceptions.InvalidField;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
@@ -12,12 +13,13 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @RestControllerAdvice
@@ -66,6 +68,30 @@ public class ExceptionGlobalHandler {
 	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<ErrorResponseDTO> handle(EntityNotFoundException e) {
 		ErrorResponseDTO dto = new ErrorResponseDTO("Элемент не найден в базе данных");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+	}
+
+	@ExceptionHandler(DuplicatedMailException.class)
+	public ResponseEntity<ErrorResponseDTO>	handleDuplicatedMail(DuplicatedMailException e){
+		ErrorResponseDTO dto = new ErrorResponseDTO(e.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	public ResponseEntity<ErrorResponseDTO> handleNoElement(NoSuchElementException e){
+		ErrorResponseDTO dto = new ErrorResponseDTO(e.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+	}
+
+	@ExceptionHandler(IllegalStateException.class)
+	public ResponseEntity<ErrorResponseDTO> handleIllegalState(IllegalStateException e){
+		ErrorResponseDTO dto = new ErrorResponseDTO(e.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+	}
+
+	@ExceptionHandler(MissingServletRequestParameterException.class)
+	public ResponseEntity<ErrorResponseDTO> handleMissingUrlParams(MissingServletRequestParameterException e){
+		ErrorResponseDTO dto = new ErrorResponseDTO("Не переданы в URL требуемые параметры");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
 	}
 

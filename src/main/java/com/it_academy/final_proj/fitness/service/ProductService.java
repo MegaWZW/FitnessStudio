@@ -51,7 +51,7 @@ public class ProductService implements IProductService {
 
 	@Override
 	public void update(ProductEntity newProduct, UUID uuid, LocalDateTime dtUpdate) {
-		ProductEntity product = repository.getReferenceById(uuid); //EntityNotFoundException
+		ProductEntity product = repository.getReferenceById(uuid);
 		if(!product.getDtUpdate().truncatedTo(ChronoUnit.MILLIS).equals(dtUpdate)) {
 			throw new IllegalStateException("Ошибка изменения продукта. Для изменения информации о продукте " +
 					"укажите время его последнего изменения");

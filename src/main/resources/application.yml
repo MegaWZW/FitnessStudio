@@ -7,5 +7,17 @@ spring:
   jpa:
     database: POSTGRESQL
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: gontchar.test@mail.ru
+    password: C7fkTS3X54ntJ33VzH7c
+    default-encoding: UTF-8
+    test-connection: true
+    protocol: smtps
+jwt:
+  secret: LdgOJyWTB4ZXPXUJ6SJlmmNVBvTPHN31FGAHyYAe52bsPuQma2
+  issuer: FitnessStudio
+

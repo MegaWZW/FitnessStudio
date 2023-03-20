@@ -2,6 +2,7 @@ package com.it_academy.final_proj.fitness.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.it_academy.final_proj.fitness.core.dto.user.UserCreateDTO;
+import com.it_academy.final_proj.fitness.core.dto.user.UserRegistrationDTO;
 import com.it_academy.final_proj.fitness.core.enums.Role;
 import com.it_academy.final_proj.fitness.core.enums.Status;
 import com.it_academy.final_proj.fitness.util.generators.VerificationCodeGenerator;
@@ -51,7 +52,7 @@ public class UserEntity implements Serializable {
 	private String password;
 
 	@JsonIgnore
-	private String secret;
+	private String code;
 
 	public UserEntity(){
 
@@ -64,7 +65,17 @@ public class UserEntity implements Serializable {
 		this.role = dto.getRole();
 		this.status = dto.getStatus();
 		this.password = dto.getPassword();
-		this.secret = VerificationCodeGenerator.generate();
+		this.code = VerificationCodeGenerator.generate();
+	}
+
+	public UserEntity(UserRegistrationDTO dto){
+		this.dtCreate = LocalDateTime.now();
+		this.mail = dto.getMail();
+		this.fio = dto.getFio();
+		this.role = Role.USER;
+		this.status = Status.WAITING_ACTIVATION;
+		this.password = dto.getPassword();
+		this.code = VerificationCodeGenerator.generate();
 	}
 
 	public UUID getUuid() {
@@ -131,12 +142,12 @@ public class UserEntity implements Serializable {
 		this.password = password;
 	}
 
-	public String getSecret() {
-		return secret;
+	public String getCode() {
+		return code;
 	}
 
-	public void setSecret(String secret) {
-		this.secret = secret;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override

@@ -1,12 +1,22 @@
 package com.it_academy.final_proj.fitness.core.dto.user;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 /**
  * дто для входа зарегистрированного пользователя
  */
 public class UserLoginDTO {
+
+	@NotBlank(message = "eMail должен быть заполнен")
+	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "введён не eMail")
 	private String mail;
+
+	@NotBlank(message = "Пароль должен быть указан")
+	@Size(min = 8, message = "Пароль должен иметь не менее 8 символов")
 	private String password;
 
 	public UserLoginDTO(String mail, String password) {
