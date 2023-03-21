@@ -43,10 +43,10 @@ public class ProductController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<PageDTO<ProductDTO>> getPage(
-			@RequestParam(name = "page", required = false)
+			@RequestParam(name = "page", required = false, defaultValue = "0")
 			@PositiveOrZero(message = "Номер страницы не может быть отрицательным")
 			Integer page,
-			@RequestParam(name = "size", required = false)
+			@RequestParam(name = "size", required = false, defaultValue = "20")
 			@Positive(message = "Размер страницы должен быть больше нуля")
 			Integer size){
 

@@ -80,7 +80,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.PUT, path = "/{uuid}/dt_update/{dt_update}")
 	public ResponseEntity<?> updateUser(@PathVariable(name = "uuid") UUID uuid,
 	                                    @PathVariable(name = "dt_update") Long dtUpdate,
-	                                    @RequestBody UserCreateDTO dto) {
+	                                   @Valid @RequestBody UserCreateDTO dto) {
 		UserEntity entity = conversionService.convert(dto, UserEntity.class);
 		LocalDateTime dt = conversionService.convert(dtUpdate, LocalDateTime.class);
 		userService.update(entity, uuid, dt);

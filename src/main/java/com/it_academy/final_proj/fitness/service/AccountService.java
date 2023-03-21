@@ -35,7 +35,7 @@ public class AccountService implements IAccountService {
 		repository.saveAndFlush(entity);
 		String message = "Уважаемый " + entity.getFio() + "! " + "Для завершения регистрации используйте секретный код: " +
 				entity.getCode();
-		//mailService.sendSimpleMessage(entity.getMail(), "Код активации", message);
+		mailService.sendSimpleMessage(entity.getMail(), "Код активации", message);
 	}
 
 	@Override
